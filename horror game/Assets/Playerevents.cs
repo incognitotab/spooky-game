@@ -6,7 +6,7 @@ public class Playerevents : MonoBehaviour
 {
     [SerializeField] GameObject Gunmodel;
     [SerializeField] GunManager Gun;
-    [SerializeField] ParticleSystem Partic;
+    [SerializeField] ParticleSystem Partic,Partic2;
     [SerializeField] Light lit;
 
     // Start is called before the first frame update
@@ -55,6 +55,7 @@ public class Playerevents : MonoBehaviour
         var emi = Partic.emission;
         emi.enabled = false;
         lit.enabled = false;
+        Partic2.Play();
     }
 
     IEnumerator lighter()

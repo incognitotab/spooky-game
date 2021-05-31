@@ -211,6 +211,7 @@ public class GunManager : MonoBehaviour
                             hit.collider.GetComponent<Idamagable<float, Vector3, int>>().takedamage(1, hit.point, 2);
                         }
                     }
+                    GunAnim.ResetTrigger("fire");
                     break;
                 }
 
@@ -248,6 +249,7 @@ public class GunManager : MonoBehaviour
             case guns.Handgun:
                 {
                     Handgunamo.Reload();
+                    GunAnim.ResetTrigger("reload");
                     break;
                 }
 

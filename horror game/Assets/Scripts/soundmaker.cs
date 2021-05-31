@@ -17,7 +17,7 @@ public class soundmaker : MonoBehaviour
     {
         for(int i = 0; i < 10; i++)
         {
-            col.radius += size /20;
+            col.radius += (size*2) /20;
             yield return new WaitForSecondsRealtime(0.3f / 20f);
             yield return null;
         }

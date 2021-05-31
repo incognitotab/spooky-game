@@ -11,12 +11,17 @@ public class enemyai : MonoBehaviour
    [SerializeField] bool heard;
     [SerializeField] Vector3 lasthint;
     [SerializeField]int AlertMax = 100;
+    [SerializeField] GameObject target;
+    [SerializeField] List<Eyeraycast> Eyes = new List<Eyeraycast>();
     // Start is called before the first frame update
     void Start()
     {
         navi = GetComponent<NavMeshAgent>();
         statcomp = GetComponent<enemystats>();
-       
+        foreach(Eyeraycast eye in Eyes)
+        {
+            eye.Aicomp = this;
+        }
     }
 
     public void OnTriggerEnter(Collider other)
@@ -27,6 +32,10 @@ public class enemyai : MonoBehaviour
             alertlevel += other.gameObject.GetComponent<soundmaker>().size*3;
             heard = true;
             //Rot = transform.rotation.eulerAngles;
+            foreach(Eyeraycast eye in Eyes)
+            {
+                eye.awoken(lasthint);
+            }
         }
     }
 
@@ -46,10 +55,10 @@ public class enemyai : MonoBehaviour
     {
         if (lasthint != null && heard == true && alertlevel <AlertMax )
         {
-            Vector3 V = lasthint - transform.position;
+            //Vector3 V = lasthint - transform.position;
 
-            Quaternion Rot = Quaternion.LookRotation( V);
-            transform.rotation = Quaternion.Lerp(transform.rotation, Rot, 2 * Time.deltaTime);
+            //Quaternion Rot = Quaternion.LookRotation( V);
+            //transform.rotation = Quaternion.Lerp(transform.rotation, Rot, 2 * Time.deltaTime);
             /*float checkdir = Mathf.Atan2(V.x, V.y) * Mathf.Rad2Deg;
 
             if (V.y < 0)
@@ -63,7 +72,7 @@ public class enemyai : MonoBehaviour
             }
 
             transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(Rot.x,checkdir,Rot.z)), 50);*/
-          
+            target.transform.position = lasthint;
         }
     }
 }
