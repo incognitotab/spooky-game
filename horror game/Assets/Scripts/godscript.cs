@@ -18,4 +18,10 @@ public class godscript : MonoBehaviour
     {
         Shake.Invoke();
     }
+
+    public event Action<float,Vector3> Alert;
+    public void alertadditive(float amount,Vector3 position)
+    {
+        Alert.Invoke(amount,position);
+    }
 }
